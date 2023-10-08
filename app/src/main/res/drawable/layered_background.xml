@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/textbackground"
+          android:width="240dp"/> <!-- 기존의 직사각형 배경 -->
+    <item
+        android:left="240dp"
+        android:drawable="@drawable/red" />
+</layer-list>

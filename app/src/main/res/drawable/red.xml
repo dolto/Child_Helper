@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="#FF0000" /> <!-- 붉은색 배경 설정 -->
+    <size
+        android:width="30dp"
+        android:height="40dp" /> <!-- 가로와 세로 크기 설정 (40dpx40dp의 정사각형) -->
+</shape>
