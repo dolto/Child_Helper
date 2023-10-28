@@ -10,6 +10,7 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://packagecloud.io/biopassid/FingerprintSDKAndroid/maven2")
     }
 }
 

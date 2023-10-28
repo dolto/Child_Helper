@@ -1,71 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layoutDescription="@xml/activity_main_scene"
-    android:background="#536DFE"
-    android:gravity="center"
-    tools:context=".MainActivity"
-    android:orientation="vertical">
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/activity_main_scene"
+        android:background="#536DFE"
+        android:gravity="center"
+        tools:context=".MainActivity"
+        android:orientation="vertical">
 
-    <!-- 프로필 수정 버튼 -->
-    <android.widget.Button
-        android:id="@+id/profileBtn"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@drawable/roundedbutton"
-        android:drawableTop="@drawable/profile"
-        android:hint="selecter_photo"/>
-
-    <TextView
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:textAlignment="center"
-        android:text="홍길동"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginTop="12dp"
-        />
-
-    <!-- 프로필 정보 -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <!-- 주소 -->
+        <!-- 프로필 수정 버튼 -->
         <android.widget.Button
-            android:layout_width="264dp"
+            android:id="@+id/profileBtn"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@drawable/roundedbutton"
+            android:drawableTop="@drawable/profile"
+            android:fontFamily="@font/ginseng"
+            android:hint="selecter_photo"/>
+
+        <TextView
+            android:layout_width="150dp"
             android:layout_height="40dp"
-            android:background="@drawable/textbackground"
+            android:textAlignment="center"
+            android:fontFamily="@font/ginseng"
+            android:text="홍길동"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
             android:layout_marginTop="12dp"
-            android:text="주소"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <!-- 연락처 -->
-        <android.widget.Button
-            android:layout_width="264dp"
-            android:layout_height="40dp"
-            android:background="@drawable/textbackground"
-            android:layout_marginTop="24dp"
-            android:text="연락처"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-        <!-- 메세지 -->
-        <android.widget.Button
-            android:layout_width="264dp"
-            android:layout_height="40dp"
-            android:background="@drawable/textbackground"
-            android:layout_marginTop="24dp"
-            android:text="메세지"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:gravity="center"/>
-    </LinearLayout>
+            />
 
-</LinearLayout>
+        <!-- 프로필 정보 -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <!-- 주소 -->
+            <android.widget.Button
+                android:layout_width="264dp"
+                android:layout_height="40dp"
+                android:background="@drawable/textbackground"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/ginseng"
+                android:text="주소"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+            <!-- 연락처 -->
+            <android.widget.Button
+                android:layout_width="264dp"
+                android:layout_height="40dp"
+                android:background="@drawable/textbackground"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/ginseng"
+                android:text="연락처"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+            <!-- 메세지 -->
+            <android.widget.Button
+                android:layout_width="264dp"
+                android:layout_height="40dp"
+                android:background="@drawable/textbackground"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/ginseng"
+                android:text="메세지"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

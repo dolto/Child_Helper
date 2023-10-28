@@ -1,3 +1,8 @@
 package com.example.child_helper
 
-data class Person()
+import android.graphics.Bitmap
+
+data class Person(
+    var fingers: List<Bitmap>
+)
+val person = Person(listOf());

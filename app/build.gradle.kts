@@ -7,6 +7,10 @@ android {
     namespace = "com.example.child_helper"
     compileSdk = 34
 
+    dataBinding{
+        enable=true
+    }
+
     defaultConfig {
         applicationId = "com.example.child_helper"
         minSdk = 24
@@ -44,4 +48,9 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation("com.google.android.gms:play-services-vision:20.1.3") // or higher
+    implementation("com.biopassid:fingerprintsdk:0.1.1") // latest version
+    implementation("com.squareup.retrofit2:retrofit:2.5.0")
+    implementation("com.squareup.retrofit2:converter-gson:2.5.0")
+    implementation("com.google.code.gson:gson:2.8.7")
 }

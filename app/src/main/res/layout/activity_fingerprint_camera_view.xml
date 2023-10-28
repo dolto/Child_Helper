@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".FingerprintCameraView">
+<layout>
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".FingerprintCameraView">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <br.com.biopassid.fingerprintsdk.ui.view.FingerprintView
+            android:id="@+id/fingerprintView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:licenseKey="H4JF-U4XA-BXSJ-XHFI"
+            app:showDistanceIndicatorView="true"
+            app:showFingerEllipseView="true"
+            app:captureType="leftHandFingers"
+            app:outputType="captureAndSegmentation"
+            app:numberFingersToCapture="4"
+            app:textFontFamily="@font/fingerprintsdk_opensans_regular"
+            app:overlayColor="#80000000"
+            app:fingerColor="#80D6A262"
+            app:distanceIndicatorLineColor="#FFFFFF"
+            app:distanceIndicatorHighlightColor="#D6A262"
+            app:helpTextEnabled="true"
+            app:helpTextColor="#FFFFFF"
+            app:helpTextSize="14sp"
+            app:helpTextLeftHandMessage="마커가 중앙에 올 때까지\n왼손(엄지손가락 제외)을 놓습니다."
+            app:helpTextRightHandMessage="마커가 중앙에 올 때까지\n오른손(엄지손가락 제외)을 놓습니다."
+            app:helpTextThumbsMessage="마커가 중앙에 올 때까지\n엄지손가락을 맞춥니다."
+            app:tooCloseTextEnabled="true"
+            app:tooCloseTextContent="너무 가까운"
+            app:tooCloseTextColor="#FFFFFF"
+            app:tooCloseTextSize="14sp"
+            app:tooFarTextEnabled="true"
+            app:tooFarTextContent="너무 먼"
+            app:tooFarTextColor="#FFFFFF"
+            app:tooFarTextSize="14sp"
+            app:backButtonEnabled="true"
+            app:backButtonBackgroundColor="#00000000"
+            app:backButtonPadding="0dp"
+            app:backButtonWidth="56dp"
+            app:backButtonHeight="56dp"
+            app:backButtonIconEnabled="true"
+            app:backButtonIconFile="@drawable/fingerprint_ic_close"
+            app:backButtonIconColor="#FFFFFF"
+            app:backButtonIconWidth="32dp"
+            app:backButtonIconHeight="32dp"
+            app:backButtonLabelEnabled="false"
+            app:backButtonLabelContent="Voltar"
+            app:backButtonLabelColor="#FFFFFF"
+            app:backButtonLabelSize="14sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
