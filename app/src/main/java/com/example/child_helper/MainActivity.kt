@@ -3,6 +3,7 @@ package com.example.child_helper
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.example.child_helper.databinding.MainPageBinding
@@ -13,16 +14,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.main_page)
         title = "메인 페이지";
-
-        val Btn_Help: View = findViewById(R.id.Btn_Help)
-        val Btn_Register : View = findViewById(R.id.Btn_Register)
-        Btn_Help.setOnClickListener{
+        Log.d("펄슨 선언 되었나?", person.toString())
+        binding.BtnHelp.setOnClickListener{
             val  intent = Intent(applicationContext, FPActivity::class.java)
             startActivity(intent)
-
-
         }
-        Btn_Register.setOnClickListener {
+        binding.BtnRegister.setOnClickListener {
             val intent = Intent(applicationContext, RegisterActivity::class.java)
             startActivity(intent)
         }

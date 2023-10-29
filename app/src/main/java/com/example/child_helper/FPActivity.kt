@@ -10,6 +10,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import com.example.child_helper.Network.retrofitInstance
 import com.example.child_helper.databinding.ActivityFpactivityBinding
 import retrofit2.Call
@@ -27,14 +28,16 @@ class FPActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_fpactivity)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_fpactivity)
         title = "지문 인식";
 
         val resultLauncher = registerForActivityResult<Intent, ActivityResult>(
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                if (!person.fingers.isEmpty()) {
+                Log.d("사람 인식 시도", "")
+                if (person.fingers.isNotEmpty()) {
+                    Log.d("사람 인식함", person.fingers[0].toString())
                     // Encode Bitmap to base64 string
                     val finger1: String =
                         bitmapToBas64(person.fingers[0])
@@ -74,13 +77,13 @@ class FPActivity : AppCompatActivity() {
                             response: Response<EnrollPersonResponse?>
                         ) {
                             Log.e(
-                                TAG,
-                                "Error trying to call enroll person. " + response.body()
+                                "에러 사람을 확인하려고 했으나 실패했음 ",
+                                response.body().toString()
                             )
                         }
 
                         override fun onFailure(call: Call<EnrollPersonResponse?>, t: Throwable) {
-                            Log.d(TAG, "EnrollPersonResponse: " + t.message)
+                            Log.d("사람파일 정보: ", t.message.toString())
                         }
                     })
                 }
@@ -88,8 +91,9 @@ class FPActivity : AppCompatActivity() {
         }
         // Start CameraActivity
         binding.fingerBtn.setOnClickListener { _ ->
-            val intent = Intent(this, FingerprintCameraView::class.java)
-            resultLauncher.launch(intent)
+            val cameraIntent = Intent(this, FingerprintCameraView::class.java)
+            resultLauncher.launch(cameraIntent)
+
         }
         //fingerBtn.setOnClickListener {
          //   var intent = Intent(applicationContext, CVActivity::class.java)
