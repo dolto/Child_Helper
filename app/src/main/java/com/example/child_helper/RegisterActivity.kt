@@ -52,15 +52,17 @@ class RegisterActivity : AppCompatActivity() {
         }
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
-//        regi_Complete.setOnClickListener {
-//
-//            for (i in 0 until adapter_address.itemCount) {
-//                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
-//                val modifiedText = viewHolder.edt_regi_address.text.toString()
-//                modifiedTextList.add(modifiedText)
-//                Toast.makeText(applicationContext, "여기까지 옴 : $modifiedText", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        regi_Complete.setOnClickListener {
+
+            val modifiedTextList = mutableListOf<String>()
+
+            for (i in 0 until adapter_address.itemCount) {
+                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
+                val modifiedText = viewHolder.regi_edt_address.text.toString()
+                Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
+                modifiedTextList.add(modifiedText)
+            }
+        }
 
         // RecyclerView에서 주소 아이템 제거하기
         adapter_address.setOnItemClickListener(object : RegisterAdapter.OnItemClickListener {

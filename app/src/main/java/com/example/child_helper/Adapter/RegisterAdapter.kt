@@ -12,6 +12,7 @@ import com.example.child_helper.R
 
 class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.Adapter<RegisterAdapter.RegiViewHolder>(){
 
+    // 아이템 제거를 위한 메소드들
     interface OnItemClickListener {
         fun onDeleteButtonClick(position: Int)
     }
@@ -22,8 +23,8 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
         onItemClickListener = listener
     }
 
+    // 아이템 제거 메소드
     fun removeItem(position: Int) {
-        Log.d("삭제 시도","삭제 시도")
         itemList.removeAt(position)
         notifyItemRemoved(position)
     }
@@ -62,18 +63,4 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
         itemList.add("")
         notifyItemInserted(itemList.size - 1)
     }
-
-    class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val button: Button = itemView.findViewById(R.id.Remove_address)
-
-        fun bind(item: Regi_ItemData, removeItem: (position: Int) -> Unit) {
-            button.setOnClickListener { removeItem(adapterPosition) }
-            // 기타 필요한 바인딩...
-        }
-    }
-
-    // 아이템 제거를 위한 메소드들
-
-
-
 }
