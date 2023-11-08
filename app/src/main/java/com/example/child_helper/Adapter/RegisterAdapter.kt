@@ -74,9 +74,8 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
         notifyItemInserted(position)
     }
 
-    // 이름을 바꾸자.
-    fun changeText(position: Int, newText: String) {
-        itemList[position] = newText
-        notifyItemChanged(position)
+    // Type 반환
+    fun getTextAtPosition(position: Int): String {
+        return itemList[position]
     }
 }
