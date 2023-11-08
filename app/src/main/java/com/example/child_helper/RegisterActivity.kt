@@ -59,7 +59,7 @@ class RegisterActivity : AppCompatActivity() {
 
         message_Button.setOnClickListener {
             val newItem = Regi_ItemData("", "메세지")
-            adapter_address.addItem(newItem, "메세지")
+            adapter_address.addItem(newItem, "메세지 ")
         }
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
