@@ -29,9 +29,10 @@ class RegisterActivity : AppCompatActivity() {
         val adapter_address = RegisterAdapter(data_address)
         recyclerView.adapter = adapter_address
 
-        // 주소 버튼을 위한 변수
+        // 주소, 연락처, 메세지 추가 버튼.
         val address_Button = findViewById<Button>(R.id.Btn_address)
-        val editText_address = findViewById<EditText>(R.id.Edt_regi_address)
+        val phone_Button = findViewById<Button>(R.id.Btn_Call)
+        val message_Button = findViewById<Button>(R.id.Btn_message)
 
 
         // 연락처를 위한 변수.
@@ -45,10 +46,20 @@ class RegisterActivity : AppCompatActivity() {
 
         val a = 0;
 
-        // 주소 리니어 레이아웃 추가를 위한 함수.
+        // 주소, 번호  리니어 레이아웃 추가를 위한 함수.
         address_Button.setOnClickListener {
-            val newItem = Regi_ItemData("New Item")
-            adapter_address.addItem(newItem)
+            val newItem = Regi_ItemData("", "주소")
+            adapter_address.addItem(newItem, "주소")
+        }
+
+        phone_Button.setOnClickListener {
+            val newItem = Regi_ItemData("", "연락처")
+            adapter_address.addItem(newItem, "연락처")
+        }
+
+        message_Button.setOnClickListener {
+            val newItem = Regi_ItemData("", "메세지")
+            adapter_address.addItem(newItem, "메세지")
         }
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.child_helper.R
 
@@ -32,6 +33,7 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
     inner class RegiViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val regi_edt_address: EditText = itemView.findViewById(R.id.Edt_regi_address)
         val regi_btn_address: Button = itemView.findViewById(R.id.Remove_address)
+        val textView: TextView = itemView.findViewById(R.id.Type)
 
         init {
             regi_btn_address.setOnClickListener {
@@ -51,7 +53,7 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
 
     override fun onBindViewHolder(holder: RegiViewHolder, position: Int) {
         val currentItem = itemList[position]
-        holder.regi_edt_address.setText(currentItem)
+        holder.textView.setText(currentItem)
     }
 
     override fun getItemCount(): Int {
@@ -59,8 +61,22 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
     }
 
     // 아이템 추가 메서드.
-    fun addItem(item: Regi_ItemData) {
+    fun addItem(item: Regi_ItemData, Type: String) {
+        // 아이템 추가
         itemList.add("")
-        notifyItemInserted(itemList.size - 1)
+
+        // 추가된 아이템의 내용 변경 (예: Type에 따라 내용 설정)
+        val position = itemList.size - 1
+
+        itemList[position] = Type
+
+        // RecyclerView에 추가 및 변경 사항 알림
+        notifyItemInserted(position)
+    }
+
+    // 이름을 바꾸자.
+    fun changeText(position: Int, newText: String) {
+        itemList[position] = newText
+        notifyItemChanged(position)
     }
 }
