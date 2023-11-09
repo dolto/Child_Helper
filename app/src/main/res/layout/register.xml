@@ -38,24 +38,24 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             >
-            <!-- 추가된 주소 -->
-            <android.widget.Button
-                android:layout_width="228dp"
-                android:layout_height="40dp"
-                android:background="@drawable/textbackground"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/ginseng"
-                android:text="추가된 주소"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center"
-                android:layout_gravity="center_horizontal"/>
+                <!-- 추가된 주소 -->
+                <android.widget.Button
+                    android:layout_width="228dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/textbackground"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/ginseng"
+                    android:text="추가된 주소"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal"/>
 
-            <android.widget.Button
-                android:id="@+id/Red"
-                android:layout_width="34dp"
-                android:layout_height="40dp"
-                android:background="@drawable/red"/>
+                <android.widget.Button
+                    android:id="@+id/Red"
+                    android:layout_width="34dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/red"/>
 
         </LinearLayout>
 
