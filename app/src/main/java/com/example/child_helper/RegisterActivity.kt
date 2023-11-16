@@ -68,14 +68,14 @@ class RegisterActivity : AppCompatActivity() {
                 val modifiedText = viewHolder.regi_edt_address.text.toString()
                 val text = adapter_address.getTextAtPosition(i)
                 if (text == "주소"){
-                    data_address.add(modifiedText)
                     Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
+                    data_address.add(modifiedText)
                 }
-                else if (text == "연락처"){
+                else if (text == "주소"){
                     Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
                     data_phone.add(modifiedText)
                 }
-                else if (text == "메세지"){
+                else if (text == "주소"){
                     Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
                     data_message.add(modifiedText)
                 }
