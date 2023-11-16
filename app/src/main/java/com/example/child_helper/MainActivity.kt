@@ -7,14 +7,15 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.child_helper.client.Client
 import com.example.child_helper.databinding.ActivityRegisterBinding
 import com.example.child_helper.databinding.MainPageBinding
+import kotlin.concurrent.thread
 import kotlin.math.log
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding :MainPageBinding
-    private lateinit var binding2:ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this,R.layout.main_page)
@@ -30,6 +31,18 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, RegisterActivity::class.java)
             startActivity(intent)
         }
+
+        thread(true){
+            Client(this,"test","test")
+        }
+//        thread(true){
+//            Client(this)
+//        }
+//        thread(true){
+//            Client(this)
+//        }
+
+
     }
 
 

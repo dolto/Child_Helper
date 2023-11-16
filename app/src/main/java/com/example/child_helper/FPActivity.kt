@@ -3,7 +3,6 @@ package com.example.child_helper
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -12,15 +11,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.child_helper.client.Client
 import com.example.child_helper.databinding.ActivityFpactivityBinding
 import java.io.ByteArrayOutputStream
 import java.io.IOException
 import java.util.Base64
+import kotlin.concurrent.thread
 
 
 class FPActivity : AppCompatActivity() {
     private val TAG = "Demo_App"
     private lateinit var binding: ActivityFpactivityBinding
+
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +37,33 @@ class FPActivity : AppCompatActivity() {
                 if (person.fingers.isNotEmpty()) {
                     Log.d("사람 인식함", person.fingers[0].toString())
                     // Encode Bitmap to base64 string
+                    val resizeFinger1 = Bitmap.createScaledBitmap(person.fingers[1], 100,100,false)
+                    val resizeFinger2 = Bitmap.createScaledBitmap(person.fingers[1], 100,100,false)
+                    val resizeFinger3 = Bitmap.createScaledBitmap(person.fingers[1], 100,100,false)
+                    val resizeFinger4 = Bitmap.createScaledBitmap(person.fingers[1], 100,100,false)
+
                     val finger1: String =
-                        bitmapToBas64(person.fingers[1])
+                        bitmapToBas64(resizeFinger1)
                     val finger2: String =
-                        bitmapToBas64(person.fingers[2])
+                        bitmapToBas64(resizeFinger2)
                     val finger3: String =
-                        bitmapToBas64(person.fingers[3])
+                        bitmapToBas64(resizeFinger3)
                     val finger4: String =
-                        bitmapToBas64(person.fingers[4])
+                        bitmapToBas64(resizeFinger4)
 
                     Log.d("손가락1", finger1)
                     Log.d("손가락2", finger2)
                     Log.d("손가락3", finger3)
                     Log.d("손가락4", finger4)
-
+                    thread(true){
+                        //Client_imageoutput_test(this, "d안녕!!!!!")
+                        val testmap = base64ToBitmap(Client(this, "Input_Image", finger1)!!)!!
+//                        binding.finger1.setImageBitmap(testmap)
+//                        binding.finger1A.setImageBitmap(base64ToBitmap(finger2)!!)
+//                        binding.finger2.setImageBitmap(base64ToBitmap(finger3)!!)
+//                        binding.finger2A.setImageBitmap(base64ToBitmap(finger4)!!)
+                        Log.d("변경 후", "출력")
+                    }
 
                     // Instantiate Enroll request
                     val enrollPersonRequest = EnrollPersonRequest(
@@ -64,11 +79,14 @@ class FPActivity : AppCompatActivity() {
                             )
                         )
                     )
-
-                    binding.finger1.setImageBitmap(base64ToBitmap(finger1)!!)
+                    val testmap = base64ToBitmap(finger1)!!
+                    binding.finger1.setImageBitmap(testmap)
                     binding.finger1A.setImageBitmap(base64ToBitmap(finger2)!!)
                     binding.finger2.setImageBitmap(base64ToBitmap(finger3)!!)
                     binding.finger2A.setImageBitmap(base64ToBitmap(finger4)!!)
+                    //Log.d("사진 크기","${testmap.width}, ${testmap.height}")
+                    //binding.finger1.setImageBitmap(testmap)
+
 //
 //                    // Get retrofit
 //                    val retrofit = retrofitInstance
@@ -134,40 +152,6 @@ class FPActivity : AppCompatActivity() {
         }
         return base64encoder.encodeToString(byteArray);
         //return Base64.encodeToString(byteArray, Base64.NO_WRAP)
-    }
-    private fun grayScale(orgBitmap: Bitmap): Bitmap? {
-        Log.i("gray", "in")
-        val width: Int
-        val height: Int
-        width = orgBitmap.width
-        height = orgBitmap.height
-        val bmpGrayScale = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-
-        // color information
-        var A: Int
-        var R: Int
-        var G: Int
-        var B: Int
-        var pixel: Int
-
-        // scan through all pixels
-        for (x in 0 until width) {
-            for (y in 0 until height) {
-                // get pixel color
-                pixel = orgBitmap.getPixel(x, y)
-                A = Color.alpha(pixel)
-                R = Color.red(pixel)
-                G = Color.green(pixel)
-                B = Color.blue(pixel)
-                var gray = (0.2989 * R + 0.5870 * G + 0.1140 * B).toInt()
-
-                // use 128 as threshold, above -> white, below -> black
-                gray = if (gray > 128) 255 else 0
-                // set new pixel color to output bitmap
-                bmpGrayScale.setPixel(x, y, Color.argb(A, gray, gray, gray))
-            }
-        }
-        return bmpGrayScale
     }
 
 }
