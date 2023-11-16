@@ -70,6 +70,7 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:text="어디에 살아요?"
                     android:textSize="16sp"
                      />
@@ -82,6 +83,7 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:text="전화번호가 있나요?"
                     android:textSize="16sp"
                      />
@@ -94,6 +96,7 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
+                    android:textColor="@color/black"
                     android:text="메세지를 남겨주세요."
                     android:textSize="16sp"
                     />
@@ -106,9 +109,16 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
-                    android:text="등록"
+                    android:textColor="@color/black"
+                    android:text="등록해주세요!"
                     android:textSize="16sp"
                      />
+
+                <android.widget.Button
+                    android:layout_width="264dp"
+                    android:layout_height="80dp"
+                    android:background="#6EB5FF"
+                    />
             </LinearLayout>
 
         </LinearLayout>
