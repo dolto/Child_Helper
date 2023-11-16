@@ -11,6 +11,7 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven("https://packagecloud.io/biopassid/FingerprintSDKAndroid/maven2")
+        maven("https://jitpack.io")
     }
 }
 
