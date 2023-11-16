@@ -32,6 +32,7 @@
                 android:background="@drawable/textbackground"
                 android:fontFamily="@font/ginseng"
                 android:gravity="center"
+                android:textColor="@color/black"
                 android:hint="주소를 입력하세요."
                 android:textSize="16sp"
                 android:textStyle="bold" />
