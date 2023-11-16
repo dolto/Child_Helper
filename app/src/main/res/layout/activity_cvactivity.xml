@@ -6,10 +6,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_main_scene"
-        android:background="#536DFE"
+        android:background="#6EB5FF"
         android:gravity="center"
         tools:context=".MainActivity"
         android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/ginseng"
+            android:text="이런 아이에요."
+            android:textColor="@color/white"
+            android:textSize="47sp"
+            android:layout_marginBottom="50dp"
+            />
 
         <!-- 프로필 수정 버튼 -->
         <android.widget.Button
@@ -28,8 +38,8 @@
             android:fontFamily="@font/ginseng"
             android:text="홍길동"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="30sp"
+
             android:layout_marginTop="12dp"
             />
 
@@ -39,6 +49,8 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+
+
             <!-- 주소 -->
             <android.widget.Button
                 android:layout_width="264dp"

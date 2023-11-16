@@ -7,14 +7,14 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#536DFE"
+        android:background="#6EB5FF"
         android:gravity="center">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:background="#536DFE"
+            android:background="#6EB5FF"
             android:gravity="center"
             android:orientation="vertical"
             app:layoutDescription="@xml/activity_main_scene"
@@ -29,16 +29,17 @@
                 android:drawableTop="@drawable/profile" />
 
             <EditText
-                android:layout_width="150dp"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/ginseng"
-                android:text="이름 입력"
+                android:text="이름이 뭐에요?
+                (터치해서 입력해주세요.)"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="30sp"
+                 />
 
             <LinearLayout
                 android:id="@+id/Add_layout"
@@ -46,7 +47,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="24dp"
                 android:orientation="horizontal">
-
 
                 <!-- Recycle_layout 추가 -->
 
@@ -70,9 +70,9 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
-                    android:text="주소"
+                    android:text="어디에 살아요?"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
 
                 <android.widget.Button
                     android:id="@+id/Btn_Call"
@@ -82,9 +82,9 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
-                    android:text="연락처"
+                    android:text="전화번호가 있나요?"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
 
                 <android.widget.Button
                     android:id="@+id/Btn_message"
@@ -94,9 +94,9 @@
                     android:background="@drawable/textbackground"
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
-                    android:text="메세지"
+                    android:text="메세지를 남겨주세요."
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                    />
 
                 <android.widget.Button
                     android:id="@+id/Regi_Complete"
@@ -108,7 +108,7 @@
                     android:gravity="center"
                     android:text="등록"
                     android:textSize="16sp"
-                    android:textStyle="bold" />
+                     />
             </LinearLayout>
 
         </LinearLayout>

@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layoutDescription="@xml/activity_main_scene"
-        android:background="#536DFE"
+        android:background="#6EB5FF"
         android:gravity="center"
         tools:context=".MainActivity"
         android:orientation="vertical">
@@ -27,8 +27,8 @@
             android:fontFamily="@font/ginseng"
             android:text="이름 입력"
             android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="30sp"
+
             android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
             />
