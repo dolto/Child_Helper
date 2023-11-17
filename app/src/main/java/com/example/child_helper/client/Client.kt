@@ -5,10 +5,12 @@ import android.util.Log
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.InputStream
+import java.lang.Integer.max
 import java.security.KeyStore
 import javax.net.ssl.SSLContext
 import javax.net.ssl.SSLSocket
 import javax.net.ssl.TrustManagerFactory
+import kotlin.math.min
 
 fun Client(context: Context, mod: String, data: String): String?{
     //인증서 신뢰 구성
@@ -35,7 +37,7 @@ fun Client(context: Context, mod: String, data: String): String?{
     val sslContext = SSLContext.getInstance("TLS")
     sslContext.init(null, trustManagerFactory.trustManagers, null)
 
-    val serverHost = "192.168.162.192" //안드로이드가 localhost를 찾을 떄 쓰는 주소란다
+    val serverHost = "192.168.10.131" //안드로이드가 localhost를 찾을 떄 쓰는 주소란다
     val serverPort = 55550
 
     Log.d("실행이 되었나","ㅇㅇ")
@@ -48,19 +50,29 @@ fun Client(context: Context, mod: String, data: String): String?{
     Log.d("소켓과 연결했고, input 설정함","ㅇㅇ")
     // 클라이언트에서 서버에 메시지 전송
 
-    val dataArray = data.toByteArray(Charsets.UTF_8);
-
+    val dataArray = data.toByteArray(Charsets.UTF_8)
+    val size = dataArray.size
+    var count = 0
 
     Log.d("데이터는 다음과같다", String(dataArray, Charsets.UTF_8))
-    Log.d("크기는 다음과같다", dataArray.size.toString())
+    Log.d("크기는 다음과같다", size.toString())
     output.writeUTF(mod)
     //output.writeUTF(data)
     output.writeInt(dataArray.size)
-    output.write(dataArray)
+
+    while (count < size){
+        output.write(dataArray, count, min(1024, size - count))
+        count += 1024
+    }
 
     println("데이터 전송 완료")
     val resultArray = ByteArray(dataArray.size)
-    input.read(resultArray)
+
+    count = 0
+    while (count < size){
+        input.read(resultArray, count, min(1024, size - count))
+        count += 1024
+    }
     // 서버로부터 응답 받기
     val response = String(resultArray, Charsets.UTF_8)
     println("Server response: $response")

@@ -37,10 +37,10 @@ class FPActivity : AppCompatActivity() {
                 if (person.fingers.isNotEmpty()) {
                     Log.d("사람 인식함", person.fingers[0].toString())
                     // Encode Bitmap to base64 string
-                    val resizeFinger1 = Bitmap.createScaledBitmap(person.fingers[1], 125,125,false)
-                    val resizeFinger2 = Bitmap.createScaledBitmap(person.fingers[2], 125,125,false)
-                    val resizeFinger3 = Bitmap.createScaledBitmap(person.fingers[3], 125,125,false)
-                    val resizeFinger4 = Bitmap.createScaledBitmap(person.fingers[4], 125,125,false)
+                    val resizeFinger1 = Bitmap.createScaledBitmap(person.fingers[1], 400,400,false)
+                    val resizeFinger2 = Bitmap.createScaledBitmap(person.fingers[2], 400,400,false)
+                    val resizeFinger3 = Bitmap.createScaledBitmap(person.fingers[3], 400,400,false)
+                    val resizeFinger4 = Bitmap.createScaledBitmap(person.fingers[4], 400,400,false)
 
                     val finger1: String =
                         bitmapToBas64(resizeFinger1)
@@ -58,9 +58,9 @@ class FPActivity : AppCompatActivity() {
                     thread(true){
                         //Client_imageoutput_test(this, "d안녕!!!!!")
                         val testmap1 = Client(this, "Input_Image", finger1)!!
-                        val testmap2 = Client(this, "Input_Image", finger2)!!
-                        val testmap3 = Client(this, "Input_Image", finger3)!!
-                        val testmap4 = Client(this, "Input_Image", finger4)!!
+                        val testmap2 = Client(this, "Input_Image1", finger2)!!
+                        val testmap3 = Client(this, "Input_Image2", finger3)!!
+                        val testmap4 = Client(this, "Input_Image3", finger4)!!
                         Log.d("변경 후", testmap1)
                         runOnUiThread {
                             binding.finger1.setImageBitmap(base64ToBitmap(testmap1))
