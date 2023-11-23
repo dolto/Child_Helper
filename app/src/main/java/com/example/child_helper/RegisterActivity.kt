@@ -4,12 +4,21 @@ import Regi_ItemData
 import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.child_helper.Adapter.RegisterAdapter
+import com.example.child_helper.Data.AdressData
+import com.example.child_helper.Data.FingerData
+import com.example.child_helper.Data.MemoData
+import com.example.child_helper.Data.NameData
+import com.example.child_helper.Data.PhoneNumberData
+import com.example.child_helper.Data.Profile
+import com.example.child_helper.Data.convertProflieListToJson
+import com.example.child_helper.client.Client
+import kotlinx.serialization.json.Json
 
 class RegisterActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -26,9 +35,11 @@ class RegisterActivity : AppCompatActivity() {
         // 주소, 연락처, 메세지 저장소
         // mutableListOf: 주소 초기 데이터 설정이 없다는 뜻.
         val data = mutableListOf<String>()
-        val data_address = mutableListOf<String>()
-        val data_phone = mutableListOf<String>()
-        val data_message = mutableListOf<String>()
+        val data_address = mutableListOf<AdressData>()
+        val data_phone = mutableListOf<PhoneNumberData>()
+        val data_message = mutableListOf<MemoData>()
+
+
 
 
         // Adapter 기본 설정.
@@ -62,27 +73,33 @@ class RegisterActivity : AppCompatActivity() {
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
         regi_Complete.setOnClickListener {
+            val data_name = NameData(-1, "Test", "Test")
+            val data_finger = FingerData(-1, "test", "test", "test","test")
 
             for (i in 0 until adapter_address.itemCount) {
                 val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
                 val modifiedText = viewHolder.regi_edt_address.text.toString()
                 val text = adapter_address.getTextAtPosition(i)
+
+
+
                 if (text == "주소"){
-                    Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
-                    data_address.add(modifiedText)
+                    data_address.add(AdressData(modifiedText))
                 }
-                else if (text == "주소"){
-                    Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
-                    data_phone.add(modifiedText)
+                else if (text == "연락처"){
+                    data_phone.add(PhoneNumberData(modifiedText))
                 }
-                else if (text == "주소"){
-                    Toast.makeText(applicationContext, "$modifiedText", Toast.LENGTH_SHORT).show()
-                    data_message.add(modifiedText)
+                else if (text == "메세지"){
+                    data_message.add(MemoData(modifiedText))
                 }
                 else {
-                    Toast.makeText(applicationContext, "오류 입니다.", Toast.LENGTH_SHORT).show()
                 }
             }
+
+            val data_proflie = Profile(1, data_name, data_finger, data_address, data_phone, data_message)
+            val d = convertProflieListToJson(data_proflie)
+            Log.d("","Json"+ "$d")
+            Client(this, "")
         }
 
         // RecyclerView에서 주소 아이템 제거하기
@@ -91,8 +108,6 @@ class RegisterActivity : AppCompatActivity() {
                 adapter_address.removeItem(position)
             }
         })
-
-
     }
 
 
