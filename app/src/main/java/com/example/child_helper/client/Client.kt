@@ -51,14 +51,14 @@ fun Client(context: Context, mod: String, data: String): String?{
     // 클라이언트에서 서버에 메시지 전송
 
     val dataArray = data.toByteArray(Charsets.UTF_8)
-    val size = dataArray.size
+    var size = dataArray.size
     var count = 0
 
     Log.d("데이터는 다음과같다", String(dataArray, Charsets.UTF_8))
     Log.d("크기는 다음과같다", size.toString())
     output.writeUTF(mod)
     //output.writeUTF(data)
-    output.writeInt(dataArray.size)
+    output.writeInt(size)
 
     while (count < size){
         output.write(dataArray, count, min(1024, size - count))
@@ -66,7 +66,9 @@ fun Client(context: Context, mod: String, data: String): String?{
     }
 
     println("데이터 전송 완료")
-    val resultArray = ByteArray(dataArray.size)
+
+    size = input.readInt()
+    val resultArray = ByteArray(size)
 
     count = 0
     while (count < size){

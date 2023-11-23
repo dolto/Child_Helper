@@ -29,6 +29,11 @@ class FPActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_fpactivity)
         title = "지문 인식";
 
+        var finger1: String
+        var finger2: String
+        var finger3: String
+        var finger4: String
+
         val resultLauncher = registerForActivityResult<Intent, ActivityResult>(
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
@@ -42,13 +47,13 @@ class FPActivity : AppCompatActivity() {
                     val resizeFinger3 = Bitmap.createScaledBitmap(person.fingers[3], 400,400,false)
                     val resizeFinger4 = Bitmap.createScaledBitmap(person.fingers[4], 400,400,false)
 
-                    val finger1: String =
-                        bitmapToBas64(resizeFinger1)
-                    val finger2: String =
-                        bitmapToBas64(resizeFinger2)
-                    val finger3: String =
-                        bitmapToBas64(resizeFinger3)
-                    val finger4: String =
+                    finger1=
+                    bitmapToBas64(resizeFinger1)
+                    finger2 =
+                    bitmapToBas64(resizeFinger2)
+                    finger3 =
+                    bitmapToBas64(resizeFinger3)
+                    finger4 =
                         bitmapToBas64(resizeFinger4)
 
                     Log.d("손가락1", finger1)
