@@ -74,6 +74,8 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
         notifyItemInserted(position)
     }
 
+
+
     // Type 반환
     fun getTextAtPosition(position: Int): String {
         return itemList[position]

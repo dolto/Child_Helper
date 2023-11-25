@@ -17,17 +17,22 @@ data class FingerData(
 
 @Serializable
 data class AdressData(
-    val adress: String
+    val adress: String, val order : Int
 )
 
 @Serializable
 data class PhoneNumberData(
-    val phoneNumber: String
+    val phoneNumber: String, val order : Int
 )
 
 @Serializable
 data class MemoData(
-    val memo: String
+    val memo: String, val order : Int
+)
+
+@Serializable
+data class Syndata(
+    var data: String, var data_type : String
 )
 
 @Serializable
@@ -38,11 +43,34 @@ data class Profile(
     val phoneNumberDB: MutableList<PhoneNumberData>,
     val memoDB: MutableList<MemoData>
 )
-var singlethon_profile = Profile;
+
+
+
+@Serializable
+data class Profile_regi_fin(
+    val fingerDB: FingerData
+)
+
 fun convertProflieListToJson(list: Profile): String {
 
-    Log.d("태그", "Json 처리 중 직접처리3")
     return Json.encodeToString(list)
+}
+
+fun convertJsonToProfileList(jsonString: String): Profile {
+    Log.d("","Json을 List로 변경하는 함수 진입")
+    return Json.decodeFromString(jsonString)
+    Log.d("","Json을 List로 변경 완료")
+}
+
+object Finger_singletone{
+    var finger1: String =""
+    var finger2: String =""
+    var finger3: String =""
+    var finger4: String =""
+}
+
+object test_json{
+    var test1 : String = ""
 }
 
 class Data {
