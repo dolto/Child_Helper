@@ -17,7 +17,7 @@
         android:theme="@style/Theme.Child_helper"
         tools:targetApi="31">
         <activity
-            android:name=".Register.register2"
+            android:name=".FPActivity_Resi"
             android:exported="false" />
         <activity
             android:name=".FingerprintCameraView"

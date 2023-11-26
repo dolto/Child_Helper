@@ -1,9 +1,15 @@
 package com.example.child_helper.Data
 
 import android.util.Log
+import com.google.gson.Gson
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
+
+
+val gson = Gson()
+
 
 @Serializable
 data class NameData(
@@ -17,17 +23,17 @@ data class FingerData(
 
 @Serializable
 data class AdressData(
-    val adress: String, val order : Int
+    val adress: String, val reg_order : Int
 )
 
 @Serializable
 data class PhoneNumberData(
-    val phoneNumber: String, val order : Int
+    val phoneNumber: String, val reg_order : Int
 )
 
 @Serializable
 data class MemoData(
-    val memo: String, val order : Int
+    val memo: String, val reg_order : Int
 )
 
 @Serializable
@@ -53,13 +59,13 @@ data class Profile_regi_fin(
 
 fun convertProflieListToJson(list: Profile): String {
 
-    return Json.encodeToString(list)
+    return gson.toJson(list)
 }
 
 fun convertJsonToProfileList(jsonString: String): Profile {
-    Log.d("","Json을 List로 변경하는 함수 진입")
-    return Json.decodeFromString(jsonString)
-    Log.d("","Json을 List로 변경 완료")
+    var profile_data :Profile = gson.fromJson(jsonString, Profile::class.java)
+    return profile_data
+
 }
 
 object Finger_singletone{

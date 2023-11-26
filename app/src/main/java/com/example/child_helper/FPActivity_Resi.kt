@@ -21,12 +21,15 @@ import kotlin.concurrent.thread
 
 
 
-class FPActivity : AppCompatActivity() {
+class FPActivity_Resi : AppCompatActivity() {
+
+
     private val TAG = "Demo_App"
     private lateinit var binding: ActivityFpactivityBinding
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d("","Json : 만들어지긴 했음")
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_fpactivity)
         title = "지문 인식";
@@ -37,9 +40,7 @@ class FPActivity : AppCompatActivity() {
             ActivityResultContracts.StartActivityForResult()
         ) { result: ActivityResult ->
             if (result.resultCode == RESULT_OK) {
-                Log.d("사람 인식 시도", "")
                 if (person.fingers.isNotEmpty()) {
-                    Log.d("사람 인식함", person.fingers[0].toString())
                     // Encode Bitmap to base64 string
                     val resizeFinger1 = Bitmap.createScaledBitmap(person.fingers[1], 400,400,false)
                     val resizeFinger2 = Bitmap.createScaledBitmap(person.fingers[2], 400,400,false)
@@ -70,7 +71,6 @@ class FPActivity : AppCompatActivity() {
 //                        }
 //                        Log.d("변경 후", "출력")
 //                    }
-                    Log.d("", "Json : 싱글톤1 = " + Finger_singletone.finger1)
 
                     // Instantiate Enroll request
 //                    val enrollPersonRequest = EnrollPersonRequest(
@@ -86,7 +86,6 @@ class FPActivity : AppCompatActivity() {
 //                            )
 //                        )
 //                    )
-                    Log.d("", "Json : 싱글톤2 = " + Finger_singletone.finger1)
 //                    val testmap = base64ToBitmap(finger1)!!
 //                    binding.finger1.setImageBitmap(testmap)
 //                    binding.finger1A.setImageBitmap(base64ToBitmap(finger2)!!)
@@ -120,13 +119,13 @@ class FPActivity : AppCompatActivity() {
 //                        }
 //                    })
                 }
-                Log.d("", "Json : 싱글톤3 = " + Finger_singletone.finger1)
             }
         }
         // Start CameraActivity
         binding.fingerBtn.setOnClickListener { _ ->
             val cameraIntent = Intent(this, FingerprintCameraView::class.java)
             resultLauncher.launch(cameraIntent)
+            finish()
         }
 //        binding.fingerBtn.setOnClickListener {
 //            var intent = Intent(this, CVActivity::class.java)

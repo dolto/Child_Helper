@@ -23,6 +23,7 @@ import com.example.child_helper.Data.convertProflieListToJson
 import com.example.child_helper.Data.test_json
 import com.example.child_helper.client.Client
 import kotlinx.serialization.json.Json
+import java.io.File
 import kotlin.concurrent.thread
 
 class RegisterActivity : AppCompatActivity() {
@@ -80,7 +81,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // 지문 등록 이벤트
         finger_Button.setOnClickListener {
-            val intent = Intent(applicationContext, FPActivity::class.java)
+            val intent = Intent(applicationContext, FPActivity_Resi::class.java)
             startActivity(intent)
         }
 
@@ -88,19 +89,16 @@ class RegisterActivity : AppCompatActivity() {
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
         regi_Complete.setOnClickListener {
-
+            //이름 및 사진 저장
             val regi_name = findViewById<EditText>(R.id.edt_regi_name).text.toString()
-            Log.d("","Json" + regi_name)
+            // NameData에 저장
             val data_name = NameData(-1, regi_name, "Test")
 
-
-
+            // ReCyclerView에서 저장.
             for (i in 0 until adapter_address.itemCount) {
                 val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
                 val modifiedText = viewHolder.regi_edt_address.text.toString()
                 val text = adapter_address.getTextAtPosition(i)
-
-
 
                 if (text == "주소"){
                     data_address.add(AdressData(modifiedText, i))
@@ -114,21 +112,22 @@ class RegisterActivity : AppCompatActivity() {
                 else {
                 }
             }
-
-//            val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger1, Finger_singletone.finger1,Finger_singletone.finger1)
-            val data_finger = FingerData(-1, "", "", "", "")
+            // 싱글톤에서 저장함
+            val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger1, Finger_singletone.finger1,Finger_singletone.finger1)
 
             val data_proflie = Profile(-1, data_name, data_finger, data_address, data_phone, data_message)
+            Log.d("","Json : Profile = "+ "$data_proflie")
             val d = convertProflieListToJson(data_proflie)
 
-            Toast.makeText(this, "$d", Toast.LENGTH_SHORT).show()
-            Log.d("","Json"+ "$d")
+            Log.d("","Json : String = "+ "$d")
 
             test_json.test1 = d
 
-//            thread(true){
-//                Client(this,"test","$d")
-//            }
+            thread(true){
+                Client(this,"Input_Profile","$d")
+            }
+
+            finish()
         }
 
         // RecyclerView에서 주소 아이템 제거하기
@@ -138,6 +137,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
     }
+
 
 
 }

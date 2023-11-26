@@ -3,6 +3,7 @@ package com.example.child_helper
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.child_helper.Adapter.CVadapter
 import com.example.child_helper.Data.AdressData
@@ -29,13 +30,23 @@ class CVActivity : AppCompatActivity() {
         setContentView(R.layout.activity_cvactivity)
         setTitle("지문 인식");
 
+        val view_name = findViewById<TextView>(R.id.View_name)
+
         // Profile
         val Profile_dataList: Profile =  convertJsonToProfileList(test_json.test1)
+
+        Log.d("","Json : 데이터 변경완료 ")
 
         // data_list들 정리
         val cvadressList: List<AdressData> = Profile_dataList.adressDB
         val cvphoneList: List<PhoneNumberData> = Profile_dataList.phoneNumberDB
         val cvmemoList: List<MemoData> = Profile_dataList.memoDB
+
+        Log.d("","Json : 데이터 분할 정리 완료")
+
+        view_name.text = Profile_dataList.nameDB.name
+
+        Log.d("","Json : 이름 정리 완료.")
 
         // dataList를 사용할 수 있도록 Syndata로 만들어야 함
         val cv_un_dataList = (mergeLists(cvadressList, cvphoneList, cvmemoList)).toMutableList()
