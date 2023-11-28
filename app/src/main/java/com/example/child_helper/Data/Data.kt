@@ -58,14 +58,21 @@ data class Profile_regi_fin(
 )
 
 fun convertProflieListToJson(list: Profile): String {
-
     return gson.toJson(list)
 }
 
 fun convertJsonToProfileList(jsonString: String): Profile {
     var profile_data :Profile = gson.fromJson(jsonString, Profile::class.java)
     return profile_data
+}
 
+fun convertFingerListToJson(list: FingerData): String {
+    return gson.toJson(list)
+}
+
+fun convertJsonToFingerList(jsonString: String): FingerData {
+    var profile_data :FingerData = gson.fromJson(jsonString, FingerData::class.java)
+    return profile_data
 }
 
 object Finger_singletone{

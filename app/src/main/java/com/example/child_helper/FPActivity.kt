@@ -11,11 +11,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.child_helper.Data.FingerData
 import com.example.child_helper.Data.Finger_singletone
+import com.example.child_helper.Data.convertFingerListToJson
+import com.example.child_helper.Data.test_json
 import com.example.child_helper.client.Client
 import com.example.child_helper.databinding.ActivityFpactivityBinding
 import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.lang.ref.Cleaner
+import java.lang.reflect.Type
 import java.util.Base64
 import kotlin.concurrent.thread
 
@@ -51,76 +56,15 @@ class FPActivity : AppCompatActivity() {
                     Finger_singletone.finger3 = bitmapToBas64(resizeFinger3)
                     Finger_singletone.finger4 = bitmapToBas64(resizeFinger4)
 
-                    Log.d("Json 손가락1", Finger_singletone.finger1)
-                    Log.d("Json 손가락2", Finger_singletone.finger2)
-                    Log.d("Json 손가락3", Finger_singletone.finger3)
-                    Log.d("Json 손가락4", Finger_singletone.finger4)
-//                    thread(true){
-//                        //Client_imageoutput_test(this, "d안녕!!!!!")
-//                        val testmap1 = Client(this, "Input_Image", Finger_singletone.finger1)!!
-//                        val testmap2 = Client(this, "Input_Image1", Finger_singletone.finger2)!!
-//                        val testmap3 = Client(this, "Input_Image2", Finger_singletone.finger3)!!
-//                        val testmap4 = Client(this, "Input_Image3", Finger_singletone.finger4)!!
-//                        Log.d("변경 후", testmap1)
-//                        runOnUiThread {
-//                            binding.finger1.setImageBitmap(base64ToBitmap(testmap1))
-//                            binding.finger1A.setImageBitmap(base64ToBitmap(testmap2))
-//                            binding.finger2.setImageBitmap(base64ToBitmap(testmap3))
-//                            binding.finger2A.setImageBitmap(base64ToBitmap(testmap4))
-//                        }
-//                        Log.d("변경 후", "출력")
-//                    }
-                    Log.d("", "Json : 싱글톤1 = " + Finger_singletone.finger1)
-
-                    // Instantiate Enroll request
-//                    val enrollPersonRequest = EnrollPersonRequest(
-//                        PersonRequest(
-//                            "your-customID",
-//                            listOf(
-//                                FingerPersonRequest(
-//                                    Finger_singletone.finger1,
-//                                    Finger_singletone.finger2,
-//                                    Finger_singletone.finger3,
-//                                    Finger_singletone.finger4
-//                                )
-//                            )
-//                        )
-//                    )
-                    Log.d("", "Json : 싱글톤2 = " + Finger_singletone.finger1)
-//                    val testmap = base64ToBitmap(finger1)!!
-//                    binding.finger1.setImageBitmap(testmap)
-//                    binding.finger1A.setImageBitmap(base64ToBitmap(finger2)!!)
-//                    binding.finger2.setImageBitmap(base64ToBitmap(finger3)!!)
-//                    binding.finger2A.setImageBitmap(base64ToBitmap(finger4)!!)
-                    //Log.d("사진 크기","${testmap.width}, ${testmap.height}")
-                    //binding.finger1.setImageBitmap(testmap)
-
-//
-//                    // Get retrofit
-//                    val retrofit = retrofitInstance
-//
-//                    // Execute request to the BioPass ID API
-//                    val callback: Call<EnrollPersonResponse?>? =
-//                        retrofit.enrollPerson(enrollPersonRequest)
-//
-//                    // Handle API response
-//                    callback!!.enqueue(object : Callback<EnrollPersonResponse?> {
-//                        override fun onResponse(
-//                            call: Call<EnrollPersonResponse?>,
-//                            response: Response<EnrollPersonResponse?>
-//                        ) {
-//                            Log.e(
-//                                "에러 사람을 확인하려고 했으나 실패했음 ",
-//                                response.body().toString()
-//                            )
-//                        }
-//
-//                        override fun onFailure(call: Call<EnrollPersonResponse?>, t: Throwable) {
-//                            Log.d("사람파일 정보: ", t.message.toString())
-//                        }
-//                    })
+                    val send_finger = FingerData(-1 ,Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3, Finger_singletone.finger4)
+                    val finger_json = convertFingerListToJson(send_finger)
+                    thread(true){
+                        test_json.test1 = Client(this,"Try_Login","$finger_json")!!
+                        Log.d("", "Json : 받아온 문자열 =" + test_json.test1)
+                        go_CVA()
+                        finish()
+                    }
                 }
-                Log.d("", "Json : 싱글톤3 = " + Finger_singletone.finger1)
             }
         }
         // Start CameraActivity
@@ -135,7 +79,10 @@ class FPActivity : AppCompatActivity() {
     }
 
 
-
+    fun go_CVA() {
+        val intent = Intent(applicationContext, CVActivity::class.java)
+        startActivity(intent)
+    }
 
     // Method to assist converting Bitmap to Base64 string
     @RequiresApi(Build.VERSION_CODES.O)

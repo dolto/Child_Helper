@@ -28,7 +28,7 @@ class FingerprintCameraView : AppCompatActivity() {
                 Log.d("사람에 지문 추가", "Capture: " + images[0])
                 person.fingers = images
                 setResult(RESULT_OK)
-                finish()
+
             }
 
             override fun onStatusChanged(state: FingerprintCaptureState?) {
@@ -38,6 +38,14 @@ class FingerprintCameraView : AppCompatActivity() {
             override fun onFingerDetected(rects: Array<Rect?>?) {
                 // monitor and handle finger rects
             }
-        })
+
+
+        }
+
+        )
+
     }
+
+
+
 }

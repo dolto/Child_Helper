@@ -75,13 +75,13 @@ class CVActivity : AppCompatActivity() {
 
 
         for(i in 0..(add_list.size -1)){
-            mergedList = insert_AtIndex(mergedList, add_list[i].order, add_list[i].adress, "주소")
+            mergedList = insert_AtIndex(mergedList, add_list[i].reg_order, add_list[i].adress, "주소")
         }
         for(i in 0..(phone_list.size-1)){
-            mergedList = insert_AtIndex(mergedList, phone_list[i].order, phone_list[i].phoneNumber, "연략처")
+            mergedList = insert_AtIndex(mergedList, phone_list[i].reg_order, phone_list[i].phoneNumber, "연략처")
         }
         for(i in 0..(memo_list.size-1)){
-            mergedList = insert_AtIndex(mergedList, memo_list[i].order, memo_list[i].memo, "메세지")
+            mergedList = insert_AtIndex(mergedList, memo_list[i].reg_order, memo_list[i].memo, "메세지")
         }
 
         return mergedList

@@ -46,8 +46,6 @@ class RegisterActivity : AppCompatActivity() {
         val data_message = mutableListOf<MemoData>()
 
 
-
-
         // Adapter 기본 설정.
         val adapter_address = RegisterAdapter(data)
         recyclerView.adapter = adapter_address
@@ -81,8 +79,10 @@ class RegisterActivity : AppCompatActivity() {
 
         // 지문 등록 이벤트
         finger_Button.setOnClickListener {
-            val intent = Intent(applicationContext, FPActivity_Resi::class.java)
-            startActivity(intent)
+            thread {
+                val intent = Intent(applicationContext, FPActivity_Resi::class.java)
+                startActivity(intent)
+            }
         }
 
 
@@ -113,7 +113,7 @@ class RegisterActivity : AppCompatActivity() {
                 }
             }
             // 싱글톤에서 저장함
-            val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger1, Finger_singletone.finger1,Finger_singletone.finger1)
+            val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3,Finger_singletone.finger4)
 
             val data_proflie = Profile(-1, data_name, data_finger, data_address, data_phone, data_message)
             Log.d("","Json : Profile = "+ "$data_proflie")
