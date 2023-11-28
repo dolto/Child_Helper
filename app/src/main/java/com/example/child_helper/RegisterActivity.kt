@@ -2,23 +2,29 @@ package com.example.child_helper
 
 import Regi_ItemData
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.child_helper.Adapter.RegisterAdapter
 import com.example.child_helper.Data.AdressData
 import com.example.child_helper.Data.FingerData
+import com.example.child_helper.Data.Finger_singletone
 import com.example.child_helper.Data.MemoData
 import com.example.child_helper.Data.NameData
 import com.example.child_helper.Data.PhoneNumberData
 import com.example.child_helper.Data.Profile
 import com.example.child_helper.Data.convertProflieListToJson
+import com.example.child_helper.Data.test_json
 import com.example.child_helper.client.Client
 import kotlinx.serialization.json.Json
+import java.io.File
+import kotlin.concurrent.thread
 
 class RegisterActivity : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -46,10 +52,11 @@ class RegisterActivity : AppCompatActivity() {
         val adapter_address = RegisterAdapter(data)
         recyclerView.adapter = adapter_address
 
-        // 주소, 연락처, 메세지 추가 버튼.
+        // 주소, 연락처, 메세지, 지문 추가 버튼.
         val address_Button = findViewById<Button>(R.id.Btn_address)
         val phone_Button = findViewById<Button>(R.id.Btn_Call)
         val message_Button = findViewById<Button>(R.id.Btn_message)
+        val finger_Button = findViewById<Button>(R.id.Regi_Finger)
 
 
         // 등록 버튼
@@ -68,38 +75,59 @@ class RegisterActivity : AppCompatActivity() {
 
         message_Button.setOnClickListener {
             val newItem = Regi_ItemData("", "메세지")
-            adapter_address.addItem(newItem, "메세지 ")
+            adapter_address.addItem(newItem, "메세지")
         }
+
+
+        // 지문 등록 이벤트
+        finger_Button.setOnClickListener {
+            val intent = Intent(applicationContext, FPActivity_Resi::class.java)
+            startActivity(intent)
+        }
+
+
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
         regi_Complete.setOnClickListener {
-            val data_name = NameData(-1, "Test", "Test")
-            val data_finger = FingerData(-1, "test", "test", "test","test")
+            //이름 및 사진 저장
+            val regi_name = findViewById<EditText>(R.id.edt_regi_name).text.toString()
+            // NameData에 저장
+            val data_name = NameData(-1, regi_name, "Test")
 
+            // ReCyclerView에서 저장.
             for (i in 0 until adapter_address.itemCount) {
                 val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
                 val modifiedText = viewHolder.regi_edt_address.text.toString()
                 val text = adapter_address.getTextAtPosition(i)
 
-
-
                 if (text == "주소"){
-                    data_address.add(AdressData(modifiedText))
+                    data_address.add(AdressData(modifiedText, i))
                 }
                 else if (text == "연락처"){
-                    data_phone.add(PhoneNumberData(modifiedText))
+                    data_phone.add(PhoneNumberData(modifiedText, i))
                 }
                 else if (text == "메세지"){
-                    data_message.add(MemoData(modifiedText))
+                    data_message.add(MemoData(modifiedText, i))
                 }
                 else {
                 }
             }
+            // 싱글톤에서 저장함
+            val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger1, Finger_singletone.finger1,Finger_singletone.finger1)
 
-            val data_proflie = Profile(1, data_name, data_finger, data_address, data_phone, data_message)
+            val data_proflie = Profile(-1, data_name, data_finger, data_address, data_phone, data_message)
+            Log.d("","Json : Profile = "+ "$data_proflie")
             val d = convertProflieListToJson(data_proflie)
-            Log.d("","Json"+ "$d")
-            Client(this, "")
+
+            Log.d("","Json : String = "+ "$d")
+
+            test_json.test1 = d
+
+            thread(true){
+                Client(this,"Input_Profile","$d")
+            }
+
+            finish()
         }
 
         // RecyclerView에서 주소 아이템 제거하기
@@ -109,6 +137,7 @@ class RegisterActivity : AppCompatActivity() {
             }
         })
     }
+
 
 
 }

@@ -32,9 +32,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        thread(true){
-            Client(this,"test","test")
-        }
+//        thread(true){
+//            Client(this,"test","test")
+//        }
 //        thread(true){
 //            Client(this)
 //        }

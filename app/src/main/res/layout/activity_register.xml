@@ -30,11 +30,12 @@
 
             <EditText
                 android:layout_width="350dp"
+                android:id="@+id/edt_regi_name"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:background="@android:color/transparent"
                 android:fontFamily="@font/ginseng"
-                android:text="이름이 뭐에요?
+                android:hint="이름이 뭐에요?
                 (터치해서 입력해주세요.)"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
@@ -102,6 +103,19 @@
                     />
 
                 <android.widget.Button
+                    android:id="@+id/Regi_Finger"
+                    android:layout_width="264dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="24dp"
+                    android:background="@drawable/textbackground"
+                    android:fontFamily="@font/ginseng"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:text="지문을 등록해주세요!"
+                    android:textSize="16sp"
+                     />
+
+                <android.widget.Button
                     android:id="@+id/Regi_Complete"
                     android:layout_width="264dp"
                     android:layout_height="40dp"
@@ -110,9 +124,9 @@
                     android:fontFamily="@font/ginseng"
                     android:gravity="center"
                     android:textColor="@color/black"
-                    android:text="등록해주세요!"
+                    android:text="전부 완성 했어요!"
                     android:textSize="16sp"
-                     />
+                    />
 
                 <android.widget.Button
                     android:layout_width="264dp"
