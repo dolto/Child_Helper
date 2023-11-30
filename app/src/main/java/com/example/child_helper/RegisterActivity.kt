@@ -50,6 +50,9 @@ class RegisterActivity : AppCompatActivity() {
         val adapter_address = RegisterAdapter(data)
         recyclerView.adapter = adapter_address
 
+        // 지문 버튼이 클릭이 되었는지 확인
+        var finger_check :Boolean = false
+
         // 주소, 연락처, 메세지, 지문 추가 버튼.
         val address_Button = findViewById<Button>(R.id.Btn_address)
         val phone_Button = findViewById<Button>(R.id.Btn_Call)
@@ -79,6 +82,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // 지문 등록 이벤트
         finger_Button.setOnClickListener {
+            finger_check = true
             thread {
                 val intent = Intent(applicationContext, FPActivity_Resi::class.java)
                 startActivity(intent)
@@ -89,48 +93,53 @@ class RegisterActivity : AppCompatActivity() {
 
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
         regi_Complete.setOnClickListener {
-            //이름 및 사진 저장
-            val regi_name = findViewById<EditText>(R.id.edt_regi_name).text.toString()
-            // NameData에 저장
-            val data_name = NameData(-1, regi_name, "Test")
 
-            // ReCyclerView에서 저장.
-            for (i in 0 until adapter_address.itemCount) {
-                val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
-                val modifiedText = viewHolder.regi_edt_address.text.toString()
-                val text = adapter_address.getTextAtPosition(i)
+            if(finger_check){
+                //이름 및 사진 저장
+                val regi_name = findViewById<EditText>(R.id.edt_regi_name).text.toString()
+                // NameData에 저장
+                val data_name = NameData(-1, regi_name, "Test")
 
-                if (text == "주소"){
-                    data_address.add(AdressData(modifiedText, i))
+                // ReCyclerView에서 저장.
+                for (i in 0 until adapter_address.itemCount) {
+                    val viewHolder = recyclerView.findViewHolderForAdapterPosition(i) as RegisterAdapter.RegiViewHolder
+                    val modifiedText = viewHolder.regi_edt_address.text.toString()
+                    val text = adapter_address.getTextAtPosition(i)
+
+                    if (text == "주소"){
+                        data_address.add(AdressData(modifiedText, i))
+                    }
+                    else if (text == "연락처"){
+                        data_phone.add(PhoneNumberData(modifiedText, i))
+                    }
+                    else if (text == "메세지"){
+                        data_message.add(MemoData(modifiedText, i))
+                    }
+                    else {
+                    }
                 }
-                else if (text == "연락처"){
-                    data_phone.add(PhoneNumberData(modifiedText, i))
+                // 싱글톤에서 저장함
+                val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3,Finger_singletone.finger4)
+
+                val data_proflie = Profile(-1, data_name, data_finger, data_address, data_phone, data_message)
+                Log.d("","Json : Profile = "+ "$data_proflie")
+                val d = convertProflieListToJson(data_proflie)
+
+                Log.d("","Json : String = "+ "$d")
+
+                test_json.test1 = d
+
+                thread(true){
+                    Client(this,"Input_Profile","$d")
                 }
-                else if (text == "메세지"){
-                    data_message.add(MemoData(modifiedText, i))
-                }
-                else {
-                }
+                finish()
             }
-            // 싱글톤에서 저장함
-            val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3,Finger_singletone.finger4)
-
-            val data_proflie = Profile(-1, data_name, data_finger, data_address, data_phone, data_message)
-            Log.d("","Json : Profile = "+ "$data_proflie")
-            val d = convertProflieListToJson(data_proflie)
-
-            Log.d("","Json : String = "+ "$d")
-
-            test_json.test1 = d
-
-            thread(true){
-                Client(this,"Input_Profile","$d")
+            else{
+                Toast.makeText(this, "지문을 등록해주세요!", Toast.LENGTH_SHORT).show()
             }
-
-            finish()
         }
 
-        // RecyclerView에서 주소 아이템 제거하기
+        // RecyclerView에서 아이템 제거하기
         adapter_address.setOnItemClickListener(object : RegisterAdapter.OnItemClickListener {
             override fun onDeleteButtonClick(position: Int) {
                 adapter_address.removeItem(position)

@@ -14,6 +14,7 @@ import com.example.child_helper.R
 class CVadapter(private val context: Context) : RecyclerView.Adapter<CVadapter.ViewHolder>() {
 
     var datas = mutableListOf<Syndata>()
+    private lateinit var itemClickListener : OnItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         Log.d ("", "Json : Adapter onCreate")
@@ -26,6 +27,18 @@ class CVadapter(private val context: Context) : RecyclerView.Adapter<CVadapter.V
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d ("", "Json : Adapter onBind")
         holder.bind(datas[position])
+
+        holder.itemView.setOnClickListener {
+            itemClickListener.onClick(it, position)
+        }
+    }
+
+    fun setItemClickListener(onItemClickListener: OnItemClickListener) {
+        this.itemClickListener = onItemClickListener
+    }
+
+    interface OnItemClickListener {
+        fun onClick(v: View, position: Int)
     }
 
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {

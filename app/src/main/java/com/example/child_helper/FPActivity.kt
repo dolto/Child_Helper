@@ -46,17 +46,17 @@ class FPActivity : AppCompatActivity() {
                 if (person.fingers.isNotEmpty()) {
                     Log.d("사람 인식함", person.fingers[0].toString())
                     // Encode Bitmap to base64 string
-                    val resizeFinger1 = Bitmap.createScaledBitmap(person.fingers[1], 400,400,false)
-                    val resizeFinger2 = Bitmap.createScaledBitmap(person.fingers[2], 400,400,false)
-                    val resizeFinger3 = Bitmap.createScaledBitmap(person.fingers[3], 400,400,false)
-                    val resizeFinger4 = Bitmap.createScaledBitmap(person.fingers[4], 400,400,false)
+                    val resizeFinger1 = Bitmap.createScaledBitmap(person.fingers[1], 400,400,true)
+                    val resizeFinger2 = Bitmap.createScaledBitmap(person.fingers[2], 400,400,true)
+                    val resizeFinger3 = Bitmap.createScaledBitmap(person.fingers[3], 400,400,true)
+                    val resizeFinger4 = Bitmap.createScaledBitmap(person.fingers[4], 400,400,true)
 
                     Finger_singletone.finger1 = bitmapToBas64(resizeFinger1)
                     Finger_singletone.finger2 = bitmapToBas64(resizeFinger2)
                     Finger_singletone.finger3 = bitmapToBas64(resizeFinger3)
                     Finger_singletone.finger4 = bitmapToBas64(resizeFinger4)
 
-                    val send_finger = FingerData(-1 ,Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3, Finger_singletone.finger4)
+                    val send_finger = FingerData(- 1 ,Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3, Finger_singletone.finger4)
                     val finger_json = convertFingerListToJson(send_finger)
                     thread(true){
                         test_json.test1 = Client(this,"Try_Login","$finger_json")!!
@@ -75,7 +75,6 @@ class FPActivity : AppCompatActivity() {
 //        binding.fingerBtn.setOnClickListener {
 //            var intent = Intent(this, CVActivity::class.java)
 //            startActivity(intent)
-//        }
     }
 
 

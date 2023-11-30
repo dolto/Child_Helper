@@ -37,7 +37,7 @@ fun Client(context: Context, mod: String, data: String): String?{
     val sslContext = SSLContext.getInstance("TLS")
     sslContext.init(null, trustManagerFactory.trustManagers, null)
 
-    val serverHost = "192.168.0.23" //안드로이드가 localhost를 찾을 떄 쓰는 주소란다
+    val serverHost = "192.168.162.137" //안드로이드가 localhost를 찾을 떄 쓰는 주소란다
     val serverPort = 55550
 
     Log.d("실행이 되었나","ㅇㅇ")

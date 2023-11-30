@@ -30,6 +30,8 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
         notifyItemRemoved(position)
     }
 
+
+
     inner class RegiViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val regi_edt_address: EditText = itemView.findViewById(R.id.Edt_regi_address)
         val regi_btn_address: Button = itemView.findViewById(R.id.Remove_address)
@@ -67,7 +69,6 @@ class RegisterAdapter(private val itemList: MutableList<String>) : RecyclerView.
 
         // 추가된 아이템의 내용 변경 (예: Type에 따라 내용 설정)
         val position = itemList.size - 1
-
         itemList[position] = Type
 
         // RecyclerView에 추가 및 변경 사항 알림
