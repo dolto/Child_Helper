@@ -1,9 +1,12 @@
 package com.example.child_helper
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.child_helper.Adapter.CVadapter
 import com.example.child_helper.Data.AdressData
@@ -14,6 +17,7 @@ import com.example.child_helper.Data.Syndata
 import com.example.child_helper.Data.convertJsonToProfileList
 import com.example.child_helper.Data.test_json
 import com.example.child_helper.databinding.ActivityCvactivityBinding
+
 
 class CVActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCvactivityBinding
@@ -61,6 +65,19 @@ class CVActivity : AppCompatActivity() {
         // 데이터를 RecyclerView에 추가하고 어댑터에 알림
         adapter.datas = cv_un_dataList
         adapter.notifyDataSetChanged()
+
+        adapter.setItemClickListener(object: CVadapter.OnItemClickListener{
+            override fun onClick(v: View, position: Int) {
+                if(cv_un_dataList[position].data_type == "연략처"){
+                    startActivity(Intent("android.intent.action.DIAL", Uri.parse("tel:"+ cv_un_dataList[position].data)))
+                }
+                else if(cv_un_dataList[position].data_type == "주소"){
+                    val myUri = Uri.parse("https://www.google.co.kr/maps/search/" + cv_un_dataList[position].data)
+                    val myIntent = Intent(Intent.ACTION_VIEW , myUri)
+                    startActivity(myIntent)
+                }
+            }
+        })
     }
 
     // Address,
@@ -71,8 +88,6 @@ class CVActivity : AppCompatActivity() {
         for (i in 0..(mergedListSize-1)){
             mergedList.add(Syndata("", ""))
         }
-
-
 
         for(i in 0..(add_list.size -1)){
             mergedList = insert_AtIndex(mergedList, add_list[i].reg_order, add_list[i].adress, "주소")
