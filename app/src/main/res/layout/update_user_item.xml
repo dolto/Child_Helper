@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp"
+        android:gravity="center">
+
+        <android.widget.Button
+            android:id="@+id/Btn_User_Profile"
+            android:layout_width="228dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/textbackground"
+            android:textColor="@color/black"
+            android:fontFamily="@font/ginseng"
+            android:gravity="center"
+            android:hint=""
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</layout>

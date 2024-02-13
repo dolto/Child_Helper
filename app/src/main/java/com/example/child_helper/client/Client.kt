@@ -2,6 +2,7 @@ package com.example.child_helper.client
 
 import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.io.InputStream
@@ -18,13 +19,14 @@ fun Client(context: Context, mod: String, data: String): String?{
 //    val keystorePw = "chilehelper" //패스워드는 나중에 db에서 불러올 예정
 //    System.setProperty("javax.net.ssl.trustStore", keystorePath)
 //    System.setProperty("javax.net.ssl.trustStorePassword", keystorePw)
-
+    Log.d("","서버 응답 1")
     val assetManager = context.assets
     val inputStream: InputStream = assetManager.open("keycode.p12")
     val keyStore = KeyStore.getInstance("PKCS12")
     val password = "chilehelper".toCharArray() // 키 스토어의 암호 입력
-
+    Log.d("","서버 응답 2" + "$password")
     keyStore.load(inputStream, password)
+    Log.d("","서버 응답 3")
 
     //val certificateFactory = CertificateFactory.getInstance("X.509")
    // val certificate = certificateFactory.generateCertificate(inputStream) as X509Certificate
@@ -37,17 +39,17 @@ fun Client(context: Context, mod: String, data: String): String?{
     val sslContext = SSLContext.getInstance("TLS")
     sslContext.init(null, trustManagerFactory.trustManagers, null)
 
-    val serverHost = "192.168.162.137" //안드로이드가 localhost를 찾을 떄 쓰는 주소란다
+    val serverHost = "192.168.0.23" //안드로이드가 localhost를 찾을 떄 쓰는 주소란다
     val serverPort = 55550
 
-    Log.d("실행이 되었나","ㅇㅇ")
+    Log.d("실행이 되었나","서버 응답 1")
 
     val sslSocketFactory = sslContext.socketFactory
     val clientSocket = sslSocketFactory.createSocket(serverHost, serverPort) as SSLSocket
     val input = DataInputStream(clientSocket.getInputStream())
     val output = DataOutputStream(clientSocket.getOutputStream())
 
-    Log.d("소켓과 연결했고, input 설정함","ㅇㅇ")
+    Log.d("소켓과 연결했고, input 설정함","서버 응답 2")
     // 클라이언트에서 서버에 메시지 전송
 
     val dataArray = data.toByteArray(Charsets.UTF_8)
@@ -65,7 +67,7 @@ fun Client(context: Context, mod: String, data: String): String?{
         count += 1024
     }
 
-    println("데이터 전송 완료")
+    //Toast.makeText(context, "전송완료.", Toast.LENGTH_SHORT).show()
 
     size = input.readInt()
     val resultArray = ByteArray(size)
@@ -77,7 +79,7 @@ fun Client(context: Context, mod: String, data: String): String?{
     }
     // 서버로부터 응답 받기
     val response = String(resultArray, Charsets.UTF_8)
-    println("Server response: $response")
+    Log.d("test", "서버 응답123" + "$response")
 
     println("응답 받기 완료")
     if (!clientSocket.isClosed){

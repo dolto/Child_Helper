@@ -1,6 +1,7 @@
 package com.example.child_helper
 
 import Regi_ItemData
+import SharedPrefManager
 import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,7 @@ import com.example.child_helper.Data.NameData
 import com.example.child_helper.Data.PhoneNumberData
 import com.example.child_helper.Data.Profile
 import com.example.child_helper.Data.convertProflieListToJson
+import com.example.child_helper.Data.profile_id
 import com.example.child_helper.Data.test_json
 import com.example.child_helper.client.Client
 import kotlinx.serialization.json.Json
@@ -37,6 +39,8 @@ class RegisterActivity : AppCompatActivity() {
         // 리니어 레이아웃 매니저.
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
+        val tokken = SharedPrefManager(this) // 'this'는 Context 객체입니다.
+
 
         // 주소, 연락처, 메세지 저장소
         // mutableListOf: 주소 초기 데이터 설정이 없다는 뜻.
@@ -90,15 +94,16 @@ class RegisterActivity : AppCompatActivity() {
         }
 
 
-
         // 주소 아이템 수정 버튼 클릭 이벤트에서 EditText의 값을 가져와 업데이트
         regi_Complete.setOnClickListener {
 
-            if(finger_check){
+            if(/*finger_check*/ true){
                 //이름 및 사진 저장
                 val regi_name = findViewById<EditText>(R.id.edt_regi_name).text.toString()
                 // NameData에 저장
-                val data_name = NameData(-1, regi_name, "Test")
+                Log.d("test", "서버 응답133 " + "${tokken.getToken().toString()}")
+
+                val data_name = NameData(profile_id.id, regi_name, tokken.getToken().toString() ,"Test")
 
                 // ReCyclerView에서 저장.
                 for (i in 0 until adapter_address.itemCount) {
@@ -119,9 +124,9 @@ class RegisterActivity : AppCompatActivity() {
                     }
                 }
                 // 싱글톤에서 저장함
-                val data_finger = FingerData(-1, Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3,Finger_singletone.finger4)
+                val data_finger = FingerData(profile_id.id, Finger_singletone.finger1, Finger_singletone.finger2, Finger_singletone.finger3,Finger_singletone.finger4)
 
-                val data_proflie = Profile(-1, data_name, data_finger, data_address, data_phone, data_message)
+                val data_proflie = Profile(profile_id.id, data_name, data_finger, data_address, data_phone, data_message)
                 Log.d("","Json : Profile = "+ "$data_proflie")
                 val d = convertProflieListToJson(data_proflie)
 
@@ -130,7 +135,8 @@ class RegisterActivity : AppCompatActivity() {
                 test_json.test1 = d
 
                 thread(true){
-                    Client(this,"Input_Profile","$d")
+                    Log.d("test", "서버 응답134" + "$d")
+                    Client(this,"Update_Profile","$d")
                 }
                 finish()
             }
