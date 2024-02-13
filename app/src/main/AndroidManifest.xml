@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
     <!-- Required to fetch data from the internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
@@ -16,6 +15,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Child_helper"
         tools:targetApi="31">
+        <activity
+            android:name=".Update_user_page"
+            android:exported="false" />
+        <activity
+            android:name=".Sing_up"
+            android:exported="false" />
+        <activity
+            android:name=".Login_page"
+            android:exported="false" />
         <activity
             android:name=".FPActivity_Resi"
             android:exported="false" />

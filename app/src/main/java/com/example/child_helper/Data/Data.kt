@@ -1,11 +1,10 @@
 package com.example.child_helper.Data
 
-import android.util.Log
 import com.google.gson.Gson
+import com.google.gson.JsonObject
+import com.google.gson.reflect.TypeToken
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.decodeFromString
-import kotlinx.serialization.json.Json
+import java.lang.reflect.Type
 
 
 val gson = Gson()
@@ -13,7 +12,7 @@ val gson = Gson()
 
 @Serializable
 data class NameData(
-    var id: Int, val name: String, val profile: String
+    var id: Int, val name: String, val UserID :String, val profile: String
 )
 
 @Serializable
@@ -66,6 +65,17 @@ fun convertJsonToProfileList(jsonString: String): Profile {
     return profile_data
 }
 
+fun jsonToMutableList(json: String): List<NameData> {
+    val gson = Gson()
+    val type: Type = object : TypeToken<List<NameData>>() {}.type
+    return gson.fromJson(json, type)
+}
+
+fun stringToJson(str: String): JsonObject {
+    val gson = Gson()
+    return gson.fromJson(str, JsonObject::class.java)
+}
+
 fun convertFingerListToJson(list: FingerData): String {
     return gson.toJson(list)
 }
@@ -86,5 +96,15 @@ object test_json{
     var test1 : String = ""
 }
 
+object profile_id{
+    var id : Int = 0
+}
+
 class Data {
+}
+
+data class LoginData(val username: String, val password: String)
+
+interface OnButtonClickListener {
+    fun onButtonClick(buttonText: String, position: Int)
 }
